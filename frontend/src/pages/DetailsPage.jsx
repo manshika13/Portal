@@ -42,7 +42,7 @@ const DetailsPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/submit", { ...userDetails, userEmail,correctionType });
+      await axios.post("http://localhost:5000/auth/submit", { ...userDetails, userEmail,correctionType });
     
       alert("Request Submitted Successfully!");
     } catch (error) {

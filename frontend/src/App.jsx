@@ -15,7 +15,7 @@ import NotFound from "./NotFound";
 
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(() => !!localStorage.getItem("token"));
+  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem("token"));
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -31,10 +31,14 @@ function App() {
   );
 }
 
+function PrivateRoute({ children, isAuthenticated }) {
+  return isAuthenticated ? children : <Navigate to="/login" />;
+}
+
+
 function MainApp({ isAuthenticated, setIsAuthenticated, handleLogout }) {
   const location = useLocation();
-  const hideSideBar = location.pathname === "/signup" || location.pathname === "/login" || location.pathname==="*";
-  const PrivateRoute = ({ element }) => (isAuthenticated ? element : <Navigate to="/login" />);
+  const hideSideBar = ["/signup", "/login"].includes(location.pathname);
 
   return (
     <>
@@ -43,13 +47,22 @@ function MainApp({ isAuthenticated, setIsAuthenticated, handleLogout }) {
       {!hideSideBar && <Sidebar isAuthenticated={isAuthenticated} />}
 
       <div className="container mt-6">
-        <Routes>
+      <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} />} />
-          <Route path="/aadhaar-correction" element={<AadhaarCorrection />} />
-          <Route path="/details" element={<DetailsPage />} />
+          <Route 
+            path="/dashboard" 
+            element={<PrivateRoute isAuthenticated={isAuthenticated}><Dashboard /></PrivateRoute>} 
+          />
+          <Route 
+            path="/aadhaar-correction" 
+            element={<PrivateRoute isAuthenticated={isAuthenticated}><AadhaarCorrection /></PrivateRoute>} 
+          />
+          <Route 
+            path="/details" 
+            element={<PrivateRoute isAuthenticated={isAuthenticated}><DetailsPage /></PrivateRoute>} 
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

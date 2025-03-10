@@ -5,7 +5,7 @@ const User = require("../models/User");
 
 /* Google Authentication API */
 exports.googleAuth = async (req, res) => {
-  const { code } = req.query;
+  const code = req.query.code;
 
   try {
     if (!code) {
@@ -16,18 +16,17 @@ exports.googleAuth = async (req, res) => {
     // Exchange code for access token
     const { tokens } = await oauth2Client.getToken({
       code,
-      redirect_uri: process.env.GOOGLE_REDIRECT_URI,
+      // redirect_uri: process.env.GOOGLE_REDIRECT_URI,
+      // client_id: process.env.GOOGLE_CLIENT_ID,
     });
     oauth2Client.setCredentials(tokens);
+    console.log("Google OAuth Tokens:", tokens);
 
     const userRes = await axios.get(
-      `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${googleRes.tokens.access_token}`,
-      {
-        headers: { Authorization: `Bearer ${tokens.access_token}` },
-      }
+      `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${tokens.access_token}`
     );
     const { email, name, picture } = userRes.data;
-    // console.log(userRes);
+    console.log(userRes.data);
     let user = await User.findOne({ email });
 
     if (!user) {
