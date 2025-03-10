@@ -1,0 +1,32 @@
+/* Sidebar */
+.sidebar {
+    width: 100%;
+    background-color: #343a40;
+    color: white;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    position: relative;
+    z-index: 10;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Sidebar Button */
+.sidebar-btn {
+    flex-grow: 1;
+    padding: 10px;
+    background: none;
+    border: 1px solid white;
+    color: white;
+    text-align: center;
+    margin: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.sidebar-btn:hover,
+.sidebar-btn.active {
+    background-color: white;
+    color: black;
+}

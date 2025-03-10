@@ -1,0 +1,18 @@
+.signup-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+  }
+  
+  @media (max-width: 480px) {
+    .container-fluid {
+      align-items: top;
+      padding-top: 20px;
+    }
+    
+    .signup-container {
+      width: 90%;
+      padding: 20px;
+    }
+  }
+  

@@ -1,0 +1,25 @@
+@media(max-width:576px){
+    .row{
+        padding:0 10px;
+    }
+    .btn{
+        font-size:1rem;
+        padding:12px;
+    }
+    .form-select{
+        font-size:1rem;
+    }
+    img{
+        height:auto;
+        max-height:120px;
+    }
+    h2{
+        font-size:1.2rem;
+        text-wrap:balance;
+    }
+    .container-fluid{
+        padding-top:150px;
+        overflow-y:auto;
+    }
+    
+}

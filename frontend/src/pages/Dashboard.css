@@ -1,0 +1,234 @@
+/* Full screen layout
+.dashboard {
+    display: flex;
+    height: 100vh;
+    background: linear-gradient(135deg, rgb(211, 211, 211), rgb(236, 235, 236));
+  }
+  
+  .sidebar {
+    width: 20%;
+    background-color: #343a40;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .menu-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .sidebar-btn {
+    width: 100%;
+    padding: 10px;
+    background: none;
+    border: 1px solid white;
+    color: white;
+    text-align: left;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .sidebar-btn:hover,
+  .sidebar-btn.active {
+    background-color: white;
+    color: black;
+  }
+
+  .main-content {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+  }
+
+  .form-card {
+    flex-basis: 30%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    min-width: 250px;
+  }
+  
+  .form-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  
+  .form-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+ 
+  .form-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+
+  .form-select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .submit-btn {
+    width: 100%;
+    padding: 10px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .submit-btn:hover {
+    opacity: 0.8;
+  }
+   */
+/* Full screen layout */
+
+
+/* Main content contains everything */
+.dashboard {
+  display: flex;
+  flex-direction:column;
+  height: 100vh;
+  background: linear-gradient(135deg, rgb(211, 211, 211), rgb(236, 235, 236));
+  overflow-y:auto;
+}
+/* setting a flex in dashboard is useful if we have multiple components like dashboard and main-content  */
+.main-content {
+  display: flex;
+  flex-direction:column;
+  flex-grow:1;
+  padding-top: 60px;
+  overflow-y:auto; 
+  width: 100%;
+  max-height:calc(100vh - 60px);
+} 
+
+/* Form section */
+.form-container {
+  display: flex;
+  flex-grow:1;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items:center;
+  gap: 20px; /* Increased gap for better spacing */
+  margin:0 auto;
+  width: 90%;
+  
+}
+
+/* Form card */
+.form-card {
+  flex: 1 1 calc(33.33% - 20px); /* Adjust spacing between cards */
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  min-width: 250px;
+ 
+ 
+}
+ .form-card:last-child{  
+  align-self:center;
+} 
+
+/* Adjust form cards for tablets */
+@media (max-width: 1024px) {
+  .form-card {
+      flex: 1 1 calc(50% - 20px);
+      /* max-width:calc(50% - 20px); */
+
+  }
+}
+
+/* Adjust form cards for small screens (with extra horizontal space) */
+@media (max-width: 768px) {
+  .form-container {
+      justify-content: space-between; /* Adds extra space between form cards */
+      
+  }
+  .form-card {
+      flex: 1 1 calc(80% - 20px); /* Adds extra space around each card */
+      margin: 10px auto; /* Centers cards with space */
+  }
+}
+
+/* Form title */
+.form-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Form image */
+.form-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+/* Form label */
+.form-label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* Select box */
+.form-select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+/* Submit button */
+.submit-btn {
+  width: 100%;
+  padding: 10px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.submit-btn:hover {
+  opacity: 0.8;
+}
+
+/* Enable scrolling if content overflows */
+@media (max-width: 768px) {
+  .main-content {
+      overflow-y: auto;
+      max-height: calc(100vh - 50px);
+      padding-bottom: 20px;
+  }
+}

@@ -1,0 +1,18 @@
+/* Center the login box with a max-width for desktops */
+.login-container {
+    width: 350px;
+    max-width: 90%; /* Makes it scale for small screens */
+  }
+  
+  /* Media Query for Small Screens */
+  @media (max-width: 480px) {
+    .container-fluid{
+        align-items: top;
+        padding-top: 20px;
+    }
+    .login-container {
+      width: 90%; /* Expands width on small screens */
+      padding: 50px; /* Reduces padding */
+      box-shadow: none; /* Removes shadow on very small screens */
+    }
+  }
