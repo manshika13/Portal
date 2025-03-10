@@ -64,7 +64,7 @@ router.post("/login", async (req, res) => {
 });
 
 // 🔹 GOOGLE LOGIN
-router.get("/google", googleAuth);
+router.get("/google/:access_token", googleAuth);
 
 router.post("/submit", (req, res) => {
   res.status(200).json({ message: "Request received" });
