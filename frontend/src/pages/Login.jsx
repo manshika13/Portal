@@ -12,38 +12,48 @@ const Login = () => {
 
   // 🔹 Google Login Handler
   const handleGoogleLogin = useGoogleLogin({
-    onSuccess: async (authResult) => {
-      try {
-        if (!authResult.code) {
-          throw new Error("Authorization code not received");
-        }
+    // onSuccess: async (authResult) => {
+    //   try {
+    //     if (!authResult.code) {
+    //       throw new Error("Authorization code not received");
+    //     }
 
-        // Send the authorization code to the backend
-        const result = await googleAuth(authResult.code);
+    //     // Send the authorization code to the backend
+    //     const result = await googleAuth(authResult.code);
 
-        if (!result.data || !result.data.token) {
-          throw new Error("Invalid response from Google authentication");
-        }
+    //     if (!result.data || !result.data.token) {
+    //       throw new Error("Invalid response from Google authentication");
+    //     }
 
-        const { email, name, image } = result.data.user;
-        const token = result.data.token;
+    //     const { email, name, image } = result.data.user;
+    //     const token = result.data.token;
 
-        // Store user info in localStorage
-        const userInfo = { email, name, token, image };
-        localStorage.setItem("user-info", JSON.stringify(userInfo));
+    //     // Store user info in localStorage
+    //     const userInfo = { email, name, token, image };
+    //     localStorage.setItem("user-info", JSON.stringify(userInfo));
 
-        // Redirect to dashboard
-        navigate("/dashboard");
-      } catch (error) {
-        console.error("Google Login Error:", error);
-        alert("Google Login Failed!");
-      }
+    //     // Redirect to dashboard
+    //     navigate("/dashboard");
+    //   } catch (error) {
+    //     console.error("Google Login Error:", error);
+    //     alert("Google Login Failed!");
+    //   }
+    // },
+    // onError: (error) => {
+    //   console.error("Google Login Failed:", error);
+    //   alert("Google Login Failed!");
+    // },
+    // flow: "auth-code",
+
+    onSuccess: (tokenResponse) => {
+      console.log(tokenResponse.access_token);
+      googleAuth(tokenResponse.access_token);
+      navigate("/dashboard");
     },
     onError: (error) => {
       console.error("Google Login Failed:", error);
       alert("Google Login Failed!");
     },
-    flow: "auth-code",
   });
 
   // 🔹 Manual Login Handler
@@ -59,7 +69,9 @@ const Login = () => {
       // Redirect to dashboard
       navigate("/dashboard");
     } catch (error) {
-      alert("Login failed: " + (error.response?.data?.error || "Unknown error"));
+      alert(
+        "Login failed: " + (error.response?.data?.error || "Unknown error")
+      );
     }
   };
 

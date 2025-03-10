@@ -6,7 +6,18 @@ const api = axios.create({
 });
 
 // 🔹 Google Authentication
-export const googleAuth = (code) => api.get(`/auth/google?code=${code}`);
+
+export const googleAuth = async (code) => {
+  try {
+    const response = await api.get(`/auth/google/${code}`);
+    return response;
+  } catch (error) {
+    console.error("Google Auth Error:", error);
+    throw error;
+  }
+};
+
+// export const googleAuth = (code) => api.get(`/auth/google?code=${code}`);
 // export const googleAuth = async (code) => {
 //   try {
 //     const response = await api.post("/auth/google", { params: { code } });
