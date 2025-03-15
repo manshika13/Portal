@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const api = axios.create({
   baseURL: "http://localhost:5000",
@@ -33,11 +34,12 @@ export const googleAuth = async (code) => {
 
 // 🔹 Manual Login
 export const loginUser = async (email, password) => {
-  console.log("he");
+  // const navigate = useNavigate();
   try {
     const response = await api.post("/auth/login", { email, password });
     console.log(response);
-    return response.data;
+
+    return response; // navigate("/dashboard");
   } catch (error) {
     console.error("Login Error:", error.response?.data || error.message);
     throw new Error(error.response?.data?.error || "Login failed");

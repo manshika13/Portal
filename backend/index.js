@@ -71,16 +71,16 @@ app.post("/auth/submit", async (req, res) => {
       subject: "Correction Request Submission",
       text: `Dear Anganvagi Team,
 
-A correction request has been submitted by ${userEmail}.
+      A correction request has been submitted by ${userEmail}.
 
-Details:
-- Name: ${name}
-- Document ID: ${documentId}
-- Correction Type: ${correctionType}
-- Reason: ${reason}
+      Details:
+      - Name: ${name}
+      - Document ID: ${documentId}
+      - Correction Type: ${correctionType}
+      - Reason: ${reason}
 
-Best regards,
-Correction Request System`,
+      Best regards,
+      Correction Request System`,
     };
 
     await transporter.sendMail(mailOptions);
