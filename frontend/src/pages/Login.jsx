@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGoogleLogin } from "@react-oauth/google";
 import { googleAuth, loginUser } from "../../api";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./login.css";
 
@@ -9,6 +9,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
 
   // 🔹 Google Login Handler
   const handleGoogleLogin = useGoogleLogin({
@@ -62,18 +63,29 @@ const Login = () => {
     try {
       const res = await loginUser(email, password);
 
+      console.log(res);
+
       // Store user info in localStorage
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user-info", JSON.stringify(res.data.user));
+      localStorage.setItem("token", res.data.data.token);
+      localStorage.setItem("user-info", JSON.stringify(res.data.data.user));
 
       // Redirect to dashboard
-      navigate("/dashboard");
+      window.location.href = "/dashboard";
     } catch (error) {
+      console.error("Login Error:", error);
       alert(
         "Login failed: " + (error.response?.data?.error || "Unknown error")
       );
     }
   };
+
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   const userInfo = localStorage.getItem("user-info");
+  //   if (token && userInfo && location.pathname === "/login") {
+  //     navigate("/dashboard", { replace: true });
+  //   }
+  // }, [navigate]);
 
   return (
     <div className="container-fluid d-flex vh-100 justify-content-center align-items-center bg-light">
