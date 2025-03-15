@@ -9,9 +9,11 @@ const DetailsPage = () => {
 
   useEffect(() => {
     // setUserEmail("user@gmail.com")
-    const storedEmail = localStorage.getItem("userEmail");
-    if (storedEmail) {
-      setUserEmail(storedEmail);
+    const userInfo = localStorage.getItem("user-info");
+    const details = JSON.parse(userInfo);
+    console.log(details.email);
+    if (userInfo) {
+      setUserEmail(details.email);
     }
   }, []);
 

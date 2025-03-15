@@ -2,7 +2,10 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
-const { googleAuth } = require("../controllers/authController");
+const {
+  googleAuth,
+  correctionController,
+} = require("../controllers/authController");
 require("dotenv").config();
 const router = express.Router();
 
@@ -66,8 +69,7 @@ router.post("/login", async (req, res) => {
 // 🔹 GOOGLE LOGIN
 router.get("/google/:access_token", googleAuth);
 
-router.post("/submit", (req, res) => {
-  res.status(200).json({ message: "Request received" });
-});
+// 🔹 Route to Submit Correction Request
+router.post("/submit", correctionController);
 
 module.exports = router;
